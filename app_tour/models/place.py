@@ -9,8 +9,6 @@ class Place(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)  
     opening_hours = models.CharField(max_length=100) 
     tags = models.TextField()  
-    average_rating = models.DecimalField(max_digits=3, decimal_places=1)  
-    number_of_ratings = models.IntegerField()
     picture = models.ImageField(upload_to="images/")
 
     def __str__(self):
