@@ -1,27 +1,33 @@
-
-from rest_framework.decorators import  permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import  status
 from ..models import Rating
-from rest_framework.response import Response
 from ..serializers.rating import ListRatingSerializers, CreateRatingSerializers
-from rest_framework.views import APIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView
+
+class CreateDiscountView(CreateAPIView):
+    queryset = Rating.objects.all()
+    serializer_class = CreateRatingSerializers
+    permission_classes = [IsAuthenticated]
 
 
-@permission_classes([IsAuthenticated])
-class DiscountView(APIView):
+class ListRatingView(ListAPIView):
+    queryset = Rating.objects.all()
+    serializer_class = ListRatingSerializers
+    permission_classes = [IsAuthenticated]
     
-    def post(self, request):
-        serializer = CreateRatingSerializers(data=request.data)   
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    def get(self, request):
-        rating = Rating.objects.all()
-        serializer = ListRatingSerializers(rating, many=True)
-        
-        if rating is None:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class RetrieveRatingView(RetrieveAPIView):
+    queryset = Rating.objects.all()
+    serializer_class = ListRatingSerializers
+    permission_classes = [IsAuthenticated]
+
+
+class DeleteRatingView(DestroyAPIView):
+    queryset = Rating.objects.all()
+    permission_classes = [IsAuthenticated]
+
+
+class UpdateRatingView(UpdateAPIView):
+    queryset = Rating.objects.all()
+    serializer_class = CreateRatingSerializers
+    permission_classes = [IsAuthenticated]
+

@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from ..models import Place
-#from .serializers import Category2Serializer, User2Serializer
 
 
 class ListPlaceSerializer(serializers.ModelSerializer):

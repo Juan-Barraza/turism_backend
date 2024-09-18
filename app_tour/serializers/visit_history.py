@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from ..models import Visit_history
-from serializers import ListPlaceSerializer, ListUserSerializers
+from .user import ListUserSerializers
+from .place import ListPlaceSerializer
 
 class ListVisitHistorySerializers(serializers.ModelSerializer):
     places = ListPlaceSerializer()

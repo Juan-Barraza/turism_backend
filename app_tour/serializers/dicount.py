@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from ..models import Discount
-from serializers import ListPlaceSerializer
+from .place import ListPlaceSerializer
 
 class ListDiscountSerializers(serializers.ModelSerializer):
     places = ListPlaceSerializer()
