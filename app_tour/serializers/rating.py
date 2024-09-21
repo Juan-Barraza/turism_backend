@@ -1,33 +1,30 @@
 from rest_framework import serializers
-from ..models import Rating
+from app_tour.models import Rating, Place
 from .user import ListUserSerializers
 from .place import ListPlaceSerializer
 
 class ListRatingSerializers(serializers.ModelSerializer):
-    places = ListPlaceSerializer()
-    users = ListUserSerializers()
-
+    place = ListPlaceSerializer()
+    user = ListUserSerializers()
     class Meta:
         model = Rating
         fields = (
             "id",
             "rating",
             "review",
-            "users",
+            "user",
             "date",
-            "places"
+            "place"
         )
 
 class CreateRatingSerializers(serializers.ModelSerializer):
-    places = ListPlaceSerializer()
-    users = ListUserSerializers()
+    place = serializers.PrimaryKeyRelatedField(queryset=Place.objects.all())
 
     class Meta:
         model = Rating
         fields = (
             "rating",
             "review",
-            "users",
             "date",
-            "places"
+            "place",
         )

@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from ..models import Visit_history
+from app_tour.models import Visit_history, Place
 from .user import ListUserSerializers
 from .place import ListPlaceSerializer
 
 class ListVisitHistorySerializers(serializers.ModelSerializer):
-    places = ListPlaceSerializer()
-    users = ListUserSerializers()
+    place = ListPlaceSerializer()
+    user = ListUserSerializers()
 
     class Meta:
         model = Visit_history
@@ -13,19 +13,14 @@ class ListVisitHistorySerializers(serializers.ModelSerializer):
             "id",
             "visit_date",
             "times_visited",
-            "users",
-            "places"
+            "user",
+            "place"
         )
 
 class CreateVisitHistorySerializers(serializers.ModelSerializer):
-    places = ListPlaceSerializer()
-    users = ListUserSerializers()
-
+    place = serializers.PrimaryKeyRelatedField(queryset=Place.objects.all())
     class Meta:
         model = Visit_history
         fields = (
-            "visit_date",
-            "times_visited",
-            "users",
-            "places"
+            "place",
         )
