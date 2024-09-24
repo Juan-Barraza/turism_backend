@@ -1,14 +1,21 @@
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView
 from ..serializers.user import CreateUserSerializers, ListUserSerializers, UpdateUserSerializer
+from app_tour.filters import UserFilter
 from ..models import User
 
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = CreateUserSerializers
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_class = UserFilter
+    search_fields = ['is_vip', 'first_name', 'last_name']
+    ordering_fields = ['is_vip', 'prefence']
     
     @permission_classes([IsAuthenticated])
     def list(self, request, *args, **kwargs):

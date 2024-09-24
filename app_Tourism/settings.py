@@ -36,6 +36,7 @@ THRID_APPS = [
     'app_tour',
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_filters',
 ]
 
 INSTALLED_APPS = [
