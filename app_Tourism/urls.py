@@ -29,5 +29,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/', include("app_tour.urls"))
+    path('apiV1/', include("app_tour.urls"))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

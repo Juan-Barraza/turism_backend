@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-z+muazqwo^j74+h4y=0qlw!&&-dz4l_o5r*bw&r9p40&pkq5+5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -96,7 +96,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'app_Tourism.wsgi.application'
 
-ALLOWED_HOSTS = ['*']
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
