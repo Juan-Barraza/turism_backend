@@ -16,7 +16,11 @@ class ListUserSerializers(serializers.ModelSerializer):
             "email"
         )
         extra_kwargs = {'password': {'write_only': True},
-                        'is_admin': {'write_only': True}}
+                        'is_admin': {'write_only': True},
+                        'preferred_language': {'required': False},  
+                        'is_vip': {'required': False},              
+                        'preferences': {'required': False}}
+        
 
 
 class CreateUserSerializers(serializers.ModelSerializer):
