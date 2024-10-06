@@ -13,13 +13,14 @@ class ListUserSerializers(serializers.ModelSerializer):
             "preferred_language",
             "is_vip",
             "preferences",
-            "email"
+            "email",
+            "picture",
+            "location",
+            "gender",
+            "born_day",
         )
         extra_kwargs = {'password': {'write_only': True},
-                        'is_admin': {'write_only': True},
-                        'preferred_language': {'required': False},  
-                        'is_vip': {'required': False},              
-                        'preferences': {'required': False}}
+                        'is_admin': {'write_only': True}}
         
 
 
@@ -34,10 +35,18 @@ class CreateUserSerializers(serializers.ModelSerializer):
             "password",
             "preferred_language",
             "is_vip",
-            "preferences"
+            "preferences",
+            "picture",
+            "location",
+            "gender",
+            "born_day",
         )
     extra_kwargs = {'password': {'write_only': True},
-                    'is_admin': {'write_only': True}}
+                    'is_admin': {'write_only': True},
+                    'preferred_language': {'required': False},  
+                    'is_vip': {'required': False},              
+                    'preferences': {'required': False},
+                    'picture': {'required': False},}
 
         
     def create(self, validated_data):
