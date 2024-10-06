@@ -1,7 +1,8 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import permission_classes
+from rest_framework.decorators import permission_classes, api_view
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView
 from ..serializers.user import CreateUserSerializers, ListUserSerializers, UpdateUserSerializer
@@ -41,6 +42,15 @@ class UserViewSet(ModelViewSet):
         if self.action == "list" or self.action == "retrieve":
             return ListUserSerializers
         return CreateUserSerializers
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_login(request):
+    user = request.user
+    serializer = ListUserSerializers(user)
+    if user is None :
+        return Response(serializer.errors, 400)
+    return Response(serializer.data, 200)
     
 class CreateUserView(CreateAPIView):
     queryset = User.objects.all()
