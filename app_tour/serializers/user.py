@@ -59,18 +59,28 @@ class UpdateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
+            "id",
             "first_name",
             "last_name",
             "email",
             "username",
-            "password",
             "preferred_language",
             "is_vip",
-            "preferences"
+            "preferences",
+            "email",
+            "picture",
+            "location",
+            "gender",
+            "born_day",
         )
         extra_kwargs = {
             'password': {'write_only': True, 'required': False},  
-            'username': {'required': False},  
+            'username': {'required': False},
+            'preferred_language': {'required': False},  
+                    'is_vip': {'required': False},              
+                    'preferences': {'required': False},
+                    'picture': {'required': False},
+  
         }
 
     def update(self, instance, validated_data):
