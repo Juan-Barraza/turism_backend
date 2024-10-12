@@ -28,6 +28,7 @@ class CreateUserSerializers(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
+            "id",
             "first_name",
             "last_name",
             "email",
@@ -46,7 +47,8 @@ class CreateUserSerializers(serializers.ModelSerializer):
                     'preferred_language': {'required': False},  
                     'is_vip': {'required': False},              
                     'preferences': {'required': False},
-                    'picture': {'required': False},}
+                    'picture': {'required': False},
+                    'id': {'requiered': False}}
 
         
     def create(self, validated_data):
