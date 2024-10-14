@@ -82,16 +82,26 @@ class UpdateUserSerializer(serializers.ModelSerializer):
                     'is_vip': {'required': False},              
                     'preferences': {'required': False},
                     'picture': {'required': False},
+                    'id': {'requiered': False}
   
         }
-
+        
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['preferences'] = instance.preferences.split(',') if instance.preferences else []
+        return data
+    
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)
+        preferences = validated_data.pop('preferences', None)
         if password:
             instance.set_password(password) 
+        
+        if preferences is not None:
+            validated_data['preferences'] = ','.join(preferences)
+            
         for attr, value in validated_data.items():
             if value != "":
                 setattr(instance, attr, value)
-
         instance.save()
         return instance
